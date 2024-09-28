@@ -8,7 +8,13 @@ The **Core Layer** is a fundamental component of our Flutter Clean Architecture 
 
 #### 1. Connection
 
-Manages network connectivity, ensuring that the application can make network requests only when a reliable internet connection is available. This enhances the overall user experience.
+**File**: `network_info.dart`
+
+Manages network connectivity, ensuring that the application can make network requests only when a reliable internet connection is available. This enhances the overall user experience. The following classes are defined:
+
+- **NetworkInfo**: An abstract class that provides a contract for network connectivity checks. It includes a getter, `isConnected`, which returns a `Future<bool>` indicating the network connection status.
+
+- **NetworkInfoImpl**: Implements the `NetworkInfo` interface using the `DataConnectionChecker` package. It uses `hasConnection` to determine the current network status, returning a boolean value asynchronously.
 
 #### 2. Databases
 
@@ -18,11 +24,30 @@ Manages network connectivity, ensuring that the application can make network req
 
 #### 3. Errors
 
-Establishes a comprehensive error-handling strategy by defining custom exceptions for different scenarios that may occur during API interactions. This approach improves application reliability and user trust.
+Establishes a comprehensive error-handling strategy by defining custom exceptions for different scenarios that may occur during API interactions. This approach improves application reliability and user trust. The following custom exceptions are defined:
+
+- **ErrorModel**: This class encapsulates the error details, including the HTTP status code and error message. It provides a structured way to represent error information received from API responses.
+
+- **ServerException**: A base exception class that captures server-related errors. It includes an instance of `ErrorModel` to provide detailed error context.
+
+- **CacheException**: Represents exceptions that occur during caching operations, encapsulating an error message for clarity.
+
+Additionally, specific server exceptions extend `ServerException` to handle various types of errors, such as:
+- **ConnectionTimeoutException**: Triggered when a connection request times out.
+- **UnauthorizedException**: Indicates that the user is not authorized to access the requested resource.
+- **NotFoundException**: Represents a 404 error when the requested resource cannot be found.
 
 #### 4. Params
 
-Includes parameter classes that encapsulate the parameters required for API requests. This structured approach enhances code readability and maintainability, making it easier to manage and pass data during network interactions.
+**File**: `params.dart`
+
+Includes parameter classes that encapsulate the parameters required for API requests. This structured approach enhances code readability and maintainability, making it easier to manage and pass data during network interactions. The following parameter classes are defined:
+
+- **TemplateParams**: Contains the `id` parameter, representing a unique identifier for a template.
+
+- **UserParams**: Contains the `id` parameter, representing a unique identifier for a user.
+
+- **PostParams**: Contains the `id` parameter, representing a unique identifier for a post.
 
 ### Conclusion
 
