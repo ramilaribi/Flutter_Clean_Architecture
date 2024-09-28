@@ -1,4 +1,4 @@
-# Flutter Clean Architecture Documentation
+<h1 align="center">Flutter Clean Architecture</h1>
 
 The **Flutter Clean Architecture** project is designed to provide a robust and scalable structure for Flutter applications. By adhering to Clean Architecture principles, this project separates concerns across different layers, making the codebase maintainable, testable, and extensible.
 
