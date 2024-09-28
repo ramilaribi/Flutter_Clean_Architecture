@@ -16,10 +16,10 @@ This layer defines a robust API consumption mechanism. It abstracts the complexi
 ### Cache
 Data caching is another essential feature of the Core Layer. It leverages local storage solutions, such as `SharedPreferences`, to persist important data across application sessions. This functionality allows the application to retain user preferences and other critical information, ensuring a seamless user experience.
 
-### Errors
+## 3. Errors
 The Core Layer implements a comprehensive error-handling strategy. Custom exceptions are defined to manage different error scenarios that may occur during API interactions. This systematic approach enables the application to respond effectively to errors, enhancing reliability and user trust.
 
-### Params
+## 4. Params
 To facilitate structured data handling, the Core Layer includes specific parameter classes that encapsulate the parameters required for API requests. These classes improve code readability and maintainability, making it easier for developers to manage and pass necessary data during network interactions.
 
 ## Conclusion
