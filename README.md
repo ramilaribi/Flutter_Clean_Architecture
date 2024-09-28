@@ -1,54 +1,110 @@
-## Core Layer Documentation
+# Flutter Clean Architecture Documentation
 
-### Overview
+The **Flutter Clean Architecture** project is designed to provide a robust and scalable structure for Flutter applications. By adhering to Clean Architecture principles, this project separates concerns across different layers, making the codebase maintainable, testable, and extensible.
 
-The **Core Layer** is a fundamental component of our Flutter Clean Architecture project. It encapsulates essential functionalities required for the application, such as network management, API interactions, error handling, and data caching. This layer adheres to Clean Architecture principles, ensuring a clear separation of concerns for better maintainability and scalability.
+---
+
+## Core Layer 🛠️
+
+The **Core Layer** is a fundamental component that encapsulates essential functionalities required for the application, such as network management, API interactions, error handling, and data caching. 
 
 ### Key Components
 
-#### 1. Connection
+#### 1. Connection 🌐
 
-**File**: `network_info.dart`
+Manages network connectivity, ensuring reliable internet connections for network requests.
 
-Manages network connectivity, ensuring that the application can make network requests only when a reliable internet connection is available. This enhances the overall user experience. The following classes are defined:
+- **NetworkInfo**: An abstract class that provides a contract for network connectivity checks.
+- **NetworkInfoImpl**: Implements the `NetworkInfo` interface using the `DataConnectionChecker` package.
 
-- **NetworkInfo**: An abstract class that provides a contract for network connectivity checks. It includes a getter, `isConnected`, which returns a `Future<bool>` indicating the network connection status.
+#### 2. Databases 🗄️
 
-- **NetworkInfoImpl**: Implements the `NetworkInfo` interface using the `DataConnectionChecker` package. It uses `hasConnection` to determine the current network status, returning a boolean value asynchronously.
+- **API**: Abstracts the complexities of making HTTP requests.
+- **Cache**: Implements data caching using local storage solutions (e.g., `SharedPreferences`).
 
-#### 2. Databases
+#### 3. Errors ❗
 
-- **API**: Facilitates API consumption by abstracting the complexities of making HTTP requests. It provides a simplified interface for various request types (GET, POST, PATCH, DELETE) to interact with the server effectively.
-  
-- **Cache**: Implements data caching using local storage solutions (e.g., `SharedPreferences`) to persist critical information and user preferences across sessions, promoting a seamless user experience.
+Establishes a comprehensive error-handling strategy by defining custom exceptions.
 
-#### 3. Errors
+- **ErrorModel**: Encapsulates error details, including HTTP status codes and error messages.
+- **ServerException**: Captures server-related errors with detailed context.
+- **CacheException**: Represents exceptions that occur during caching operations.
 
-Establishes a comprehensive error-handling strategy by defining custom exceptions for different scenarios that may occur during API interactions. This approach improves application reliability and user trust. The following custom exceptions are defined:
+#### 4. Params 📦
 
-- **ErrorModel**: This class encapsulates the error details, including the HTTP status code and error message. It provides a structured way to represent error information received from API responses.
+Includes parameter classes for API requests.
 
-- **ServerException**: A base exception class that captures server-related errors. It includes an instance of `ErrorModel` to provide detailed error context.
+- **TemplateParams**: Represents a unique identifier for a template.
+- **UserParams**: Represents a unique identifier for a user.
+- **PostParams**: Represents a unique identifier for a post.
 
-- **CacheException**: Represents exceptions that occur during caching operations, encapsulating an error message for clarity.
+---
 
-Additionally, specific server exceptions extend `ServerException` to handle various types of errors, such as:
-- **ConnectionTimeoutException**: Triggered when a connection request times out.
-- **UnauthorizedException**: Indicates that the user is not authorized to access the requested resource.
-- **NotFoundException**: Represents a 404 error when the requested resource cannot be found.
+## Presentation Layer 🎨
 
-#### 4. Params
+The **Presentation Layer** is responsible for displaying data to the user and handling user interactions. It serves as the UI component of the application, ensuring that the user experience is intuitive and responsive.
 
-**File**: `params.dart`
+#### 1. UI Widgets 📱
 
-Includes parameter classes that encapsulate the parameters required for API requests. This structured approach enhances code readability and maintainability, making it easier to manage and pass data during network interactions. The following parameter classes are defined:
+- **Screens**: Represent the various views of the application, each corresponding to a different feature or section.
+- **Widgets**: Reusable components that make up the UI, promoting consistency and reusability across the application.
 
-- **TemplateParams**: Contains the `id` parameter, representing a unique identifier for a template.
+#### 2. State Management 📊
 
-- **UserParams**: Contains the `id` parameter, representing a unique identifier for a user.
+Utilizes state management solutions (e.g., Provider, Riverpod) to manage the application state efficiently, ensuring that the UI reflects changes in data seamlessly.
 
-- **PostParams**: Contains the `id` parameter, representing a unique identifier for a post.
+---
 
-### Conclusion
+## Domain Layer 🏗️
 
-The Core Layer provides a solid foundation for the application, ensuring efficient handling of essential functionalities. By following Clean Architecture principles, this layer supports scalability, testability, and maintainability, allowing developers to enhance the application easily in the future.
+The **Domain Layer** contains the business logic of the application. It defines the core use cases and entities, providing an interface for the other layers to interact with.
+
+#### 1. Entities 🧑‍🤝‍🧑
+
+- **User**: Represents a user within the application, containing relevant attributes such as name, email, and id.
+- **Post**: Represents a post created by a user, containing attributes like content, timestamp, and id.
+
+#### 2. Repositories 🏪
+
+- **UserRepository**: Defines methods for accessing user-related data, such as creating, updating, and fetching users.
+- **PostRepository**: Defines methods for accessing post-related data, including creating, updating, and fetching posts.
+
+#### 3. Use Cases 📋
+
+Defines the various actions that can be performed within the application, such as creating a user, fetching posts, and updating user profiles. Each use case corresponds to a specific business requirement.
+
+---
+
+## Data Layer 📥
+
+The **Data Layer** is responsible for managing data sources, including local databases and remote APIs. It handles data retrieval, storage, and mapping to domain entities.
+
+#### 1. Models 🏷️
+
+- **UserModel**: Represents the user data structure used to map API responses to the domain `User` entity.
+- **PostModel**: Represents the post data structure used to map API responses to the domain `Post` entity.
+
+#### 2. Repositories 🏪
+
+- **UserRepository**: Defines methods for accessing user-related data.
+- **PostRepository**: Defines methods for accessing post-related data.
+
+#### 3. Data Sources 🗃️
+
+- **Remote Data Source**: Handles API interactions to fetch data from external servers.
+- **Local Data Source**: Manages local data storage (e.g., SQLite, SharedPreferences) to persist information.
+
+---
+
+## Template for Entities 📝
+
+This project includes a **template** for entities that you can easily customize to fit your specific requirements. By using these templates, you can save time and streamline your development process. Feel free to replace the existing entities with your own to accelerate your application development!
+
+---
+
+## Conclusion 🎉
+
+The **Flutter Clean Architecture** provides a solid foundation for building scalable and maintainable applications. By clearly separating concerns across the Core, Presentation, Domain, and Data layers, developers can enhance the application easily in the future while ensuring a robust and reliable user experience.
+
+---
+Feel free to ask for help! 🤝 Just don’t be surprised if I ask if you’ve tried turning it off and on again—every developer’s favorite solution! 😂🔄💻
