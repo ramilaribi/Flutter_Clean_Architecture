@@ -10,19 +10,16 @@ The **Core Layer** is a fundamental component of our Flutter Clean Architecture 
 
 The Core Layer includes a network connectivity management system that checks for active internet connections. This functionality is crucial for ensuring that the application can make network requests only when there is a reliable connection, improving the user experience.
 
-### 2. Databases
+## 2. Databases
+### API
 This layer defines a robust API consumption mechanism. It abstracts the complexities of making HTTP requests, providing a simplified interface for interaction with the server. The API consumer handles various types of requests, including GET, POST, PATCH, and DELETE, allowing for flexible data retrieval and submission.
-
-### 3. Errors
-
-The Core Layer implements a comprehensive error-handling strategy. Custom exceptions are defined to manage different error scenarios that may occur during API interactions. This systematic approach enables the application to respond effectively to errors, enhancing reliability and user trust.
-
-### 4. Data Caching
-
+### Cache
 Data caching is another essential feature of the Core Layer. It leverages local storage solutions, such as `SharedPreferences`, to persist important data across application sessions. This functionality allows the application to retain user preferences and other critical information, ensuring a seamless user experience.
 
-### 5. params
+### Errors
+The Core Layer implements a comprehensive error-handling strategy. Custom exceptions are defined to manage different error scenarios that may occur during API interactions. This systematic approach enables the application to respond effectively to errors, enhancing reliability and user trust.
 
+### Params
 To facilitate structured data handling, the Core Layer includes specific parameter classes that encapsulate the parameters required for API requests. These classes improve code readability and maintainability, making it easier for developers to manage and pass necessary data during network interactions.
 
 ## Conclusion
